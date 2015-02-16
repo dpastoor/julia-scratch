@@ -24,7 +24,7 @@ using DataFrames
 
 # In[4]:
 
-df = readtable("/Users/devin/Desktop/predout_qpc_2cmt2.csv")
+df = readtable("predout_qpc_2cmt2.csv")
 
 
 # In[5]:
