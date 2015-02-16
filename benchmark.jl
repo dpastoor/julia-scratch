@@ -20,11 +20,8 @@ end
 # In[3]:
 
 using DataFrames
-
-
-# In[4]:
-
-df = readtable("predout_qpc_2cmt2.csv")
+# cd("$homedir()/Repos/julia-scratch") # for some reason wont work
+df = readtable("/Users/devin/Repos/julia-scratch/predout_qpc_2cmt2.csv")
 
 
 # In[5]:
