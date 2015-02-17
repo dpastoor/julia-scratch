@@ -32,7 +32,7 @@ function cleannm(filename, headerrow=2, overwrite = false)
     if overwrite
         c = open(normalizedfilename, "w+")
     else
-        c = open(dirfile[1]*"/"*fileext[1]*"_"*"cleaned"*fileext[2], "w+")
+        c = open("$(dirfile[1])/$(fileext[1])_cleaned$(fileext[2])", "w+")
     end
     write(c, wdat)
     close(c)
