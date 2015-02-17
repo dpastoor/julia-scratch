@@ -24,7 +24,7 @@ function cleannm(filename, headerrow=2, overwrite = false)
         end
     end
     for x in rawdat
-        if(!ismatch(r"ID|DV|TIME|MDV|EVID", x)) 
+        if(!ismatch(r"TABLE|ID|DV|TIME|MDV|EVID", x)) 
             push!(keeplines, lstrip(x))
         end
     end
