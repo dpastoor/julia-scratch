@@ -1,7 +1,15 @@
 function cleannm(filename, headerrow=2, overwrite = false)
-
-    dirfile = splitdir(abspath(filename))
+    
+    normalizedfilename = abspath(filename)
+    
+    if(!isfile(normalizedfilename))
+        error("file not found at: "*normalizedfilename)
+    end
+    
+    dirfile = splitdir(normalizedfilename)
     fileext = splitext(dirfile[2])
+    
+
     rawdat = readlines(open(filename))
     keeplines = similar(rawdat[3:4], 0)
     if headerrow .== -99
@@ -22,7 +30,7 @@ function cleannm(filename, headerrow=2, overwrite = false)
     end
     wdat = [replace(rawdat[headerrow], " ", ""), keeplines]
     if overwrite
-        c = open(abspath(filename), "w+")
+        c = open(normalizedfilename, "w+")
     else
         c = open(dirfile[1]*"/"*fileext[1]*"_"*"cleaned"*fileext[2], "w+")
     end
