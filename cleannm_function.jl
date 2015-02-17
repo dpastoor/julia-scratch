@@ -3,7 +3,7 @@ function cleannm(filename, headerrow=2, overwrite = false)
     normalizedfilename = abspath(filename)
     
     if(!isfile(normalizedfilename))
-        error("file not found at: "*normalizedfilename)
+        error("file not found at: $normalizedfilename")
     end
     
     dirfile = splitdir(normalizedfilename)
