@@ -1,8 +1,21 @@
 using ArgParse
 
-function cleannm(filename, headerrow=2)
+function cleannm(filename, headerrow=-99)
     rawdat = readlines(open(filename))
     keeplines = similar(rawdat[3:4], 0)
+    println(headerrow)
+    if headerrow .== -99
+        for (i, x) in enumerate(rawdat)
+            if headerrow .== -99
+                if ismatch(r"ID|DV|TIME|MDV|EVID",x)
+                    headerrow = i 
+                    break
+                end
+                continue
+            end
+        end
+    end
+    println(headerrow)
     for x in rawdat
         if(!ismatch(r"(TABLE|ID)", x)) 
             push!(keeplines, lstrip(x))
@@ -25,7 +38,7 @@ s = ArgParseSettings("clean nonmem csv tables: " *  # description
     "--hr"
         help = "which row is header"     # used by the help screen
         arg_type=Int
-        default=2
+        default=-99
     "arg1"
         help = "nonmem table name"
         required = true        # makes the argument mandatory

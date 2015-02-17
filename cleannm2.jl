@@ -3,8 +3,19 @@ using ArgParse
 function cleannm(filename, headerrow=2, overwrite = false)
     rawdat = readlines(open(filename))
     keeplines = similar(rawdat[3:4], 0)
+    if headerrow .== -99
+        for (i, x) in enumerate(rawdat)
+            if headerrow .== -99
+                if ismatch(r"ID|DV|TIME|MDV|EVID",x)
+                    headerrow = i 
+                    break
+                end
+                continue
+            end
+        end
+    end
     for x in rawdat
-        if(!ismatch(r"(TABLE|ID)", x)) 
+        if(!ismatch(r"ID|DV|TIME|MDV|EVID", x)) 
             push!(keeplines, lstrip(x))
         end
     end
