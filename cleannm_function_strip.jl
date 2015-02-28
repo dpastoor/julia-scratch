@@ -27,12 +27,13 @@ function cleannm_tocsv(filename, headerrow=-99, overwrite = false)
   for x in rawdat
       if(!ismatch(r"TABLE|ID|DV|TIME|MDV|EVID", x))
           x = lstrip(x)
-          x = replace(x, r"\s+",",")
-          x = x[1:end-1]*"\n"
+          x = replace(x, "  ", ",")
+          # can use fancier regex to match all whitespace but is 2x slower
+          # and if nonmem always is double spaced don't need to
           push!(keeplines, x)
       end
   end
-  wdat = [replace(rawdat[headerrow], " ", ""), keeplines]
+  wdat = [replace(rawdat[headerrow], " ", ","), keeplines]
   if overwrite
       c = open(normalizedfilename, "w+")
   else
